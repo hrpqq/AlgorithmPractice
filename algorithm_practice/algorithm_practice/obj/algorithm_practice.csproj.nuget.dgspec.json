@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hrpqq\\Desktop\\algorithm_practice\\algorithm_practice\\algorithm_practice.csproj": {}
+    "C:\\Users\\hrpqq\\Desktop\\DotNetProjects\\AlgorithmPractice\\algorithm_practice\\algorithm_practice\\algorithm_practice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hrpqq\\Desktop\\algorithm_practice\\algorithm_practice\\algorithm_practice.csproj": {
+    "C:\\Users\\hrpqq\\Desktop\\DotNetProjects\\AlgorithmPractice\\algorithm_practice\\algorithm_practice\\algorithm_practice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hrpqq\\Desktop\\algorithm_practice\\algorithm_practice\\algorithm_practice.csproj",
+        "projectUniqueName": "C:\\Users\\hrpqq\\Desktop\\DotNetProjects\\AlgorithmPractice\\algorithm_practice\\algorithm_practice\\algorithm_practice.csproj",
         "projectName": "algorithm_practice",
-        "projectPath": "C:\\Users\\hrpqq\\Desktop\\algorithm_practice\\algorithm_practice\\algorithm_practice.csproj",
+        "projectPath": "C:\\Users\\hrpqq\\Desktop\\DotNetProjects\\AlgorithmPractice\\algorithm_practice\\algorithm_practice\\algorithm_practice.csproj",
         "packagesPath": "C:\\Users\\hrpqq\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hrpqq\\Desktop\\algorithm_practice\\algorithm_practice\\obj\\",
+        "outputPath": "C:\\Users\\hrpqq\\Desktop\\DotNetProjects\\AlgorithmPractice\\algorithm_practice\\algorithm_practice\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hrpqq\\AppData\\Roaming\\NuGet\\NuGet.Config",
