@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "algorithm_practice", "algorithm_practice\algorithm_practice.csproj", "{F141D21F-E254-44AA-81C8-61668C1C64AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Algorithm", "algorithm_practice\Algorithm.csproj", "{F141D21F-E254-44AA-81C8-61668C1C64AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.Sort", "Algorithm.Sort\Algorithm.Sort.csproj", "{9C313B42-949E-4BCD-8273-08C633BD7760}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.Test", "Algorithm.Test\Algorithm.Test.csproj", "{62198BDC-ADFE-460C-992F-3C2133ADCA08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{F141D21F-E254-44AA-81C8-61668C1C64AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F141D21F-E254-44AA-81C8-61668C1C64AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F141D21F-E254-44AA-81C8-61668C1C64AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C313B42-949E-4BCD-8273-08C633BD7760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C313B42-949E-4BCD-8273-08C633BD7760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C313B42-949E-4BCD-8273-08C633BD7760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C313B42-949E-4BCD-8273-08C633BD7760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62198BDC-ADFE-460C-992F-3C2133ADCA08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62198BDC-ADFE-460C-992F-3C2133ADCA08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62198BDC-ADFE-460C-992F-3C2133ADCA08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62198BDC-ADFE-460C-992F-3C2133ADCA08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

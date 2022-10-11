@@ -1,0 +1,40 @@
+﻿using System.Text;
+
+namespace Algorithm.Sort
+{
+    public class Utilities
+    {
+        public static bool Less(IComparable lift, IComparable right) => lift.CompareTo(right) < 0;
+
+        public static void Swap(IList<IComparable> source, int a, int b)
+        {
+            IComparable temp = source[a];
+            source[a] = source[b];
+            source[b] = temp;
+        }
+
+        public static bool IsSort(IList<IComparable> list)
+        {
+            for (int i = 0; i < list.Count - 1; i++)
+            {
+                if (list[i].CompareTo(list[i + 1]) > 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static void Show(IList<IComparable> list) 
+        {
+            StringBuilder sb = new StringBuilder();
+            new List<IComparable>(list).ForEach(it => sb.Append(it.ToString()).Append(" "));
+            Console.WriteLine(
+$@"
+start
+{sb.ToString()}
+end
+");
+        } 
+    }
+} 
