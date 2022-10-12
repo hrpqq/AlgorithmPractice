@@ -25,6 +25,18 @@ namespace Algorithm.Sort
             return true;
         }
 
+        public static bool ElementEqual(IEnumerable<IComparable> lift, IEnumerable<IComparable> right)
+        {
+            if(lift.Count() != right.Count())
+                return false;
+            for (int i = 0; i < lift.Count(); i++)
+            {
+                if (lift.ElementAt(i).CompareTo(right.ElementAt(i)) != 0)
+                    return false;
+            }
+            return true;
+        }
+
         public static void Show(IList<IComparable> list) 
         {
             StringBuilder sb = new StringBuilder();

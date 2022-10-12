@@ -73,5 +73,24 @@ namespace Algorithm.Test.Sort
             var res = Utilities.IsSort(local);
             Assert.AreEqual(false, res);
         }
+
+        [TestMethod]
+        public void ShouldReturnTrueIfElementsAreEqual()
+        {
+            var local = new List<IComparable>() { 0, -10, 1, 5, 9, 11 };
+            var target = new List<IComparable>(local);
+            var res = Utilities.ElementEqual(local, target);
+            Assert.AreEqual(true, res);
+        }
+
+        [TestMethod]
+        public void ShouldReturnFalseIfElementsAreEqual()
+        {
+            var local = new List<IComparable>() { 0, -10, 1, 5, 9, 11 };
+            var target = new List<IComparable>(local);
+            local.Sort();
+            var res = Utilities.ElementEqual(local, target);
+            Assert.AreEqual(false, res);
+        }
     }
 }

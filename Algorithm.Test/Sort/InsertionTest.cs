@@ -9,15 +9,15 @@ using static Algorithm.Sort.Utilities;
 namespace Algorithm.Test.Sort
 {
     [TestClass]
-    public class SelectionTest
+    public class InsertionTest
     {
         [TestMethod]
         public void ShouldHasBeenSorted()
         {
-            var source = new List<IComparable>() { 1, 7, 2, 5 };
+            var source = new List<IComparable>() { 1, 7, 2, 5, -10, 0 };
             var a = new List<IComparable>(source);
             var b = new List<IComparable>(source);
-            Selection.Sort(a);
+            Insertion.Sort(a);
             b.Sort();
             Assert.AreEqual(true, ElementEqual(a, b));
         }
