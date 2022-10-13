@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,24 +7,22 @@ using static Algorithm.Sort.Utilities;
 
 namespace Algorithm.Sort
 {
-    public class Merge
+    public class MergeB2U
     {
         private static IList<IComparable> _copy;
         public static void Sort(IList<IComparable> source)
         {
             _copy = new List<IComparable>(source);
-            InnerSort(source, 0, source.Count - 1);
-        }
-
-        private static void InnerSort(IList<IComparable> source, int startIdx, int endIdx)
-        {
-            if (startIdx >= endIdx) return;
-            int midIdx = startIdx + (endIdx - startIdx) / 2;
-            InnerSort(source, startIdx, midIdx);
-            InnerSort(source, midIdx + 1, endIdx);
-            // improve performance
-            if (Less(source[midIdx + 1], source[midIdx]))
-                InnerMerge(source, startIdx, midIdx, endIdx);
+            int N = source.Count;
+            int subSize = 1;
+            while (subSize < N)
+            {
+                for (int i = 0; i < N - subSize; i += 2 * subSize)
+                {
+                    InnerMerge(source, i, i + subSize - 1, Math.Min(i + 2 * subSize - 1, N - 1));
+                }
+                subSize *= 2;
+            }
         }
 
         private static void InnerMerge(IList<IComparable> source, int startIdx, int midIdx, int endIdx)
