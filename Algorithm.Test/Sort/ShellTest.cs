@@ -9,7 +9,7 @@ using static Algorithm.Sort.Utilities;
 namespace Algorithm.Test.Sort
 {
     [TestClass]
-    public class SelectionTest
+    public class ShellTest
     {
         [TestMethod]
         public void ShouldHasBeenSorted()
@@ -17,7 +17,7 @@ namespace Algorithm.Test.Sort
             var source = new List<IComparable>() { -2, 1, 7, 2, 5, -9, 11, 11, -2, -2 };
             var a = new List<IComparable>(source);
             var b = new List<IComparable>(source);
-            Selection.Sort(a);
+            Shell.Sort(a);
             b.Sort();
             Assert.AreEqual(true, ElementEqual(a, b));
         }

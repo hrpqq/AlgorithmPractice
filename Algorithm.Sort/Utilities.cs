@@ -13,6 +13,7 @@ namespace Algorithm.Sort
             source[b] = temp;
         }
 
+
         public static bool IsSort(IList<IComparable> list)
         {
             for (int i = 0; i < list.Count - 1; i++)
