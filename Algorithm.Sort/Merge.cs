@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,7 @@ namespace Algorithm.Sort
                 else if (Less(_copy[i], _copy[j])) source[k] = _copy[i++];
                 else source[k] = _copy[j++];
             }
+            // update _copy
             for (int n = startIdx; n <= endIdx; n++)
             {
                 _copy[n] = source[n];
