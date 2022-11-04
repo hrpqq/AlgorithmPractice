@@ -58,8 +58,10 @@ namespace Algorithm.Test.StringMatching
             byte[] curBytes = new byte[] { 45, 22, 0, 0, 0, 1 };
             var hashc = RabinKarp.GetBytesHashCode(curBytes);
 
-            var hashRolling = RabinKarp.GetBytesRollingHashCode(new byte[] { 2, 45, 22, 0, 0, 0 }, new byte[] { 2 },
-                (new byte[] { 1 }, hash1.Value));
+            var hashRolling = RabinKarp.GetBytesRollingHashCode(new byte[] { 2, 45, 22, 0, 0, 0 }, 
+                new byte[] { 2 }, 
+                hash1.Value,
+                new byte[] { 1 });
 
             Assert.AreEqual(hashc, hashRolling);
         }

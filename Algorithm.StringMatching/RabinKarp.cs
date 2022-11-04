@@ -24,7 +24,8 @@ namespace Algorithm.StringMatching
                         && !string.IsNullOrEmpty(lastWindowString))
                     {
                         curWindowHash = GetRollingHashCode(lastWindowString,
-                            (source[i + patternLength - 1].ToString(), lastWindowHash.Value));
+                                                            lastWindowHash.Value, 
+                                                            source[i + patternLength - 1].ToString());
                     }
                     if (curWindowHash == patternHash
                         && pattern == curWindowString)
@@ -40,39 +41,34 @@ namespace Algorithm.StringMatching
             return result;
         }
 
-        public static uint? GetRollingHashCode(string prevStr, (string nextChar, uint prevHash) additional)
+        public static uint? GetRollingHashCode(string prevStr, uint prevStrHash, string nextChar)
         {
             var prevBytes = String2Bytes(prevStr);
             var prevHeadBytes = String2Bytes(prevStr.Substring(0, 1));
-            var additional4Bytes = (String2Bytes(additional.nextChar), additional.prevHash);
-            return GetBytesRollingHashCode(prevBytes, prevHeadBytes, additional4Bytes);
+            var nextCharBytes = String2Bytes(nextChar);
+            return GetBytesRollingHashCode(prevBytes, prevHeadBytes, prevStrHash, nextCharBytes);
         }
 
 
-        public static uint? GetBytesRollingHashCode(byte[] prevBytes, byte[] prevHeadBytes, (byte[] nextBytes, uint prevBytesHash) additional)
+        public static uint? GetBytesRollingHashCode(byte[] prevBytes, byte[] prevHeadBytes, uint prevBytesHash, byte[] nextBytes)
         {
             uint? result;
-            if (additional == default((byte[] nextBytes, uint prevHashCode)))
-            {
-                result = GetBytesHashCode(prevBytes);
-            }
-            else
-            {
-                int baseBytesLength = prevBytes.Length - prevHeadBytes.Length;
-                var baseHash = GetBytesHashCode(CreateBaseBytes(baseBytesLength));
-                var headValue = ParseBytes2Uint(prevHeadBytes);
 
-                var headHash = (headValue * baseHash % PRIME_NUM);
-                var restHash = additional.prevBytesHash >= headHash 
-                                ? additional.prevBytesHash - headHash
-                                : PRIME_NUM - headHash + additional.prevBytesHash;
+            int baseBytesLength = prevBytes.Length - prevHeadBytes.Length;
+            var baseHash = GetBytesHashCode(CreateBaseBytes(baseBytesLength));
+            var headValue = ParseBytes2Uint(prevHeadBytes);
 
-                var nextBytesHash = GetBytesHashCode(additional.nextBytes);
-                var nextBaseValue = ParseBytes2Uint(CreateBaseBytes(additional.nextBytes.Length));
+            var headHash = (headValue * baseHash % PRIME_NUM);
+            var restHash = prevBytesHash >= headHash 
+                            ? prevBytesHash - headHash
+                            : PRIME_NUM - headHash + prevBytesHash;
 
-                var newHash = (restHash * nextBaseValue + nextBytesHash) % PRIME_NUM;
-                result = newHash;
-            }
+            var nextBytesHash = GetBytesHashCode(nextBytes);
+            var nextBaseValue = ParseBytes2Uint(CreateBaseBytes(nextBytes.Length));
+
+            var newHash = (restHash * nextBaseValue + nextBytesHash) % PRIME_NUM;
+            result = newHash;
+            
             return result;
         }
 
