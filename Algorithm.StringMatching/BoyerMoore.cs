@@ -44,18 +44,18 @@ namespace Algorithm.StringMatching
                 // otherwise, jump to new location that get from BC and GS, and matching all over again.
                 else 
                 {
-                    int jumpByBC = MatchBadCharactor(pattern, badChar.Value, badCharPatternIdx, existingCharDic);
+                    int jumpByBC = MatchBadCharactor(badChar.Value, badCharPatternIdx, existingCharDic);
                     int jumpByGS = MatchGoodSuffix(pattern, jumpTab, goodSuffix);
                     int jumpByMax = Math.Max(jumpByBC, jumpByGS);
                     i += jumpByMax == -1 
-                            ? 1 
+                            ? pattern.Length
                             : jumpByMax;
                 }
             }
             return returnVal;
         }
 
-        public static int MatchBadCharactor(char[] pattern,char badChar, 
+        public static int MatchBadCharactor(char badChar, 
             int badCharPatternIdx, IReadOnlyDictionary<char, List<int>> charDic)
         {
             int jumpBy = -1;
@@ -66,7 +66,7 @@ namespace Algorithm.StringMatching
             }
             else
             {
-                jumpBy = pattern.Length;
+                jumpBy = badCharPatternIdx + 1;
             }
             return jumpBy;
         }
