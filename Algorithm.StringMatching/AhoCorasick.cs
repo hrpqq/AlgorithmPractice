@@ -117,7 +117,7 @@ namespace Algorithm.StringMatching
                             }
                             backup = backup.Fallback;
                         }
-                        node.Fallback = backup;
+                        node.Fallback = backup ?? root;
                         queue.Enqueue(node);
                     }
                 }

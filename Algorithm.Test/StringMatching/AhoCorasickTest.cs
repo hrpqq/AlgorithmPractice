@@ -19,6 +19,28 @@ namespace Algorithm.Test.StringMatching
 
             var root = AhoCorasick.BuildTire(new List<char[]> { word1, word2, word3 });
             Assert.AreNotEqual(null, root);
+
+            Assert.AreEqual(root, 
+                root.Children['a'].Fallback);
+            Assert.AreEqual(root.Children['b'], 
+                root.Children['a'].Children['b'].Fallback);
+            Assert.AreEqual(root.Children['b'].Children['c'], 
+                root.Children['a'].Children['b'].Children['c'].Fallback);
+            Assert.AreEqual(root.Children['b'].Children['c'].Children['d'],
+                root.Children['a'].Children['b'].Children['c'].Children['d'].Fallback);
+
+            Assert.AreEqual(root,
+                root.Children['b'].Fallback);
+            Assert.AreEqual(root.Children['c'],
+                root.Children['b'].Children['c'].Fallback);
+            Assert.AreEqual(root,
+               root.Children['b'].Children['c'].Children['d'].Fallback);
+
+            Assert.AreEqual(root,
+                root.Children['c'].Fallback);
+
+
+
         }
 
         [TestMethod]
