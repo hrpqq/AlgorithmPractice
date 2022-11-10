@@ -25,25 +25,34 @@ namespace Algorithm.StringMatching
                 bool find = false;
                 int targetIndex = -1;
                 char[] targetWord = new char[0];
+                
+                int innerIndex = 0;
                 while (true)
                 {
                     if (curNode.Children.ContainsKey(curChar))
                     {
                         curNode = curNode.Children[curChar];
-                        curChar = source[i++];
+                        innerIndex++;
                         if (curNode.IsEnding)
                         {
                             find = true;
-                            targetIndex = i - curNode.Length;
+                            targetIndex = i + (innerIndex - curNode.Length);
                             targetWord = GetCharsFromEnding(curNode);
+                            i = i + innerIndex;
+                            break;
                         }
+                        curChar = source[i + innerIndex];
                     }
                     else if (curNode.Fallback != null)
                     {
                         curNode = curNode.Fallback;
                     }
                     else
+                    {
+                        i = i + (innerIndex == 0 ? 1 : innerIndex);
                         break;
+                    }
+                        
                 }
                 if (find)
                 {
