@@ -15,7 +15,7 @@ namespace Algorithm.StringMatching
             return result;
         }
 
-        private static void ProcessMatching(char[] source, ACNode root, out List<(char[] target, int index)> res)
+        public static void ProcessMatching(char[] source, ACNode root, out List<(char[] target, int index)> res)
         {
             res = new List<(char[] target, int index)>();
             for (int i = 0; i < source.Length; )
@@ -52,19 +52,7 @@ namespace Algorithm.StringMatching
             }
         }
 
-        private static char[] GetCharsFromEnding(ACNode ending)
-        {
-            List<char> resList = new List<char>();
-            while (ending.Parent != null)
-            {
-                resList.Add(ending.Charactor);
-                ending = ending.Parent;
-            }
-            resList.Reverse();
-            return resList.ToArray();
-        }
-
-        private static ACNode BuildTire(IList<char[]> targets)
+        public static ACNode BuildTire(IList<char[]> targets)
         {
             var root = new ACNode(default(char))
             { 
@@ -98,32 +86,55 @@ namespace Algorithm.StringMatching
             // base on breath first search on Tire
             var queue = new Queue<ACNode>();
             queue.Enqueue(root);
-            while (queue.TryDequeue(out var current))
+            while (queue.TryDequeue(out var parent))
             {
-                if (current == root) current.Children.Values.ToList().ForEach(q => q.Fallback = root);
-                else
-                    foreach (var node in current.Children.Values)
+                if (parent == root)
+                    parent.Children.Values.ToList().ForEach(q => 
                     {
-                        var tempFallback = current.Fallback;
-                        while (tempFallback != null
-                               && !tempFallback.Children.ContainsKey(node.Charactor))
+                        q.Fallback = root;
+                        queue.Enqueue(q);
+                    });
+                else
+                {
+                    foreach (var node in parent.Children.Values)
+                    {
+                        var backup = parent.Fallback;
+                        while (backup != null)
                         {
-                            tempFallback = tempFallback.Fallback;
+                            if (backup.Children.ContainsKey(node.Charactor))
+                            {
+                                backup = backup.Children[node.Charactor];
+                                break;
+                            }
+                            backup = backup.Fallback;
                         }
-                        node.Fallback = tempFallback;
+                        node.Fallback = backup;
+                        queue.Enqueue(node);
                     }
-                current.Children.Values.ToList().ForEach(node => queue.Enqueue(node));
+                }
             }
             return root;
         }
 
-        private class ACNode
+        private static char[] GetCharsFromEnding(ACNode ending)
+        {
+            List<char> resList = new List<char>();
+            while (ending.Parent != null)
+            {
+                resList.Add(ending.Charactor);
+                ending = ending.Parent;
+            }
+            resList.Reverse();
+            return resList.ToArray();
+        }
+
+        public class ACNode
         {
             public ACNode Parent { get; set; }
             public char Charactor { get; set; }
             public IDictionary<char,ACNode> Children { get; set; }
             public ACNode Fallback { get; set; }
-            public bool IsEnding => Children?.Count > 0;
+            public bool IsEnding => Children?.Count <= 0;
             public int Length { get; set; }
             public ACNode(char charactor)
             {
