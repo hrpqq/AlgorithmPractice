@@ -20,28 +20,25 @@ namespace Algorithm.StringMatching
             res = new List<(char[] target, int index)>();
             for (int i = 0; i < source.Length; )
             {
-                var curChar = source[i];
                 var curNode = root;
                 bool find = false;
                 int targetIndex = -1;
                 char[] targetWord = new char[0];
                 
-                int innerIndex = 0;
-                while (true)
+                for (int j = 0; true;)
                 {
-                    if (curNode.Children.ContainsKey(curChar))
+                    if (curNode.Children.ContainsKey(source[i + j]))
                     {
-                        curNode = curNode.Children[curChar];
-                        innerIndex++;
+                        curNode = curNode.Children[source[i + j]];
+                        j++;
                         if (curNode.IsEnding)
                         {
                             find = true;
-                            targetIndex = i + (innerIndex - curNode.Length);
+                            targetIndex = i + (j - curNode.Length);
                             targetWord = GetCharsFromEnding(curNode);
-                            i = i + innerIndex;
+                            i = i + j;
                             break;
                         }
-                        curChar = source[i + innerIndex];
                     }
                     else if (curNode.Fallback != null)
                     {
@@ -49,7 +46,7 @@ namespace Algorithm.StringMatching
                     }
                     else
                     {
-                        i = i + (innerIndex == 0 ? 1 : innerIndex);
+                        i = i + Math.Max(1, j);
                         break;
                     }
                         

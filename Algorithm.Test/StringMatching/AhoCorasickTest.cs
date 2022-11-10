@@ -38,9 +38,6 @@ namespace Algorithm.Test.StringMatching
 
             Assert.AreEqual(root,
                 root.Children['c'].Fallback);
-
-
-
         }
 
         [TestMethod]
