@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Algorithm.StringMatching
+﻿namespace Algorithm.StringMatching
 {
     public class AhoCorasick
     {
@@ -27,29 +21,39 @@ namespace Algorithm.StringMatching
                 
                 for (int j = 0; true;)
                 {
-                    if (curNode.Children.ContainsKey(source[i + j]))
+                    if (curNode != root
+                        && curNode.Charactor == source[i + j])
                     {
-                        curNode = curNode.Children[source[i + j]];
                         j++;
                         if (curNode.IsEnding)
                         {
                             find = true;
                             targetIndex = i + (j - curNode.Length);
-                            targetWord = source.Take(new Range(i, i + j)).ToArray();
+                            targetWord = source.Take(new Range(i + j - curNode.Length, i + j)).ToArray();
                             i = i + j;
                             break;
                         }
+                        if (curNode.Children.ContainsKey(source[i + j]))
+                        {
+                            curNode = curNode.Children[source[i + j]];
+                            continue;
+                        }
+                        // try to fall back
+                        if (curNode != root)
+                        {
+                            curNode = curNode.Fallback;
+                            j--;
+                        }
                     }
-                    else if (curNode.Fallback != null)
+                    else if (curNode.Children.ContainsKey(source[i + j]))
                     {
-                        curNode = curNode.Fallback;
+                        curNode = curNode.Children[source[i + j]];
                     }
                     else
                     {
                         i = i + Math.Max(1, j);
                         break;
                     }
-                        
                 }
                 if (find)
                 {
@@ -124,7 +128,7 @@ namespace Algorithm.StringMatching
         {
             public char Charactor { get; set; }
             public IDictionary<char,ACNode> Children { get; set; }
-            public ACNode Fallback { get; set; }
+            public ACNode? Fallback { get; set; }
             public bool IsEnding => Children?.Count <= 0;
             public int Length { get; set; }
             public ACNode(char charactor)
