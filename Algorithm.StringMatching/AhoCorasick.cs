@@ -35,7 +35,7 @@ namespace Algorithm.StringMatching
                         {
                             find = true;
                             targetIndex = i + (j - curNode.Length);
-                            targetWord = GetCharsFromEnding(curNode);
+                            targetWord = source.Take(new Range(i, i + j)).ToArray();
                             i = i + j;
                             break;
                         }
@@ -63,7 +63,6 @@ namespace Algorithm.StringMatching
             var root = new ACNode(default(char))
             { 
                 Fallback = null,
-                Parent = null,
                 Length = 0
             };
             // init tire tree
@@ -80,7 +79,6 @@ namespace Algorithm.StringMatching
                     {
                         var newNode = new ACNode(c) 
                         {
-                            Parent = curNode,
                             Length = curNode.Length + 1 
                         };
                         curNode.Children[c] = newNode;
@@ -122,21 +120,8 @@ namespace Algorithm.StringMatching
             return root;
         }
 
-        private static char[] GetCharsFromEnding(ACNode ending)
-        {
-            List<char> resList = new List<char>();
-            while (ending.Parent != null)
-            {
-                resList.Add(ending.Charactor);
-                ending = ending.Parent;
-            }
-            resList.Reverse();
-            return resList.ToArray();
-        }
-
         public class ACNode
         {
-            public ACNode Parent { get; set; }
             public char Charactor { get; set; }
             public IDictionary<char,ACNode> Children { get; set; }
             public ACNode Fallback { get; set; }
