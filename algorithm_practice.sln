@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Algorithm.Test", "Algorithm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Algorithm.StringMatching", "Algorithm.StringMatching\Algorithm.StringMatching.csproj", "{BEF6B547-0D88-49F5-9BAA-C9927F8F66ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.DataCompression", "Algorithm.DataCompression\Algorithm.DataCompression.csproj", "{8B1A650E-1577-411A-8E46-416930C383F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Algorithm.DataCompression", "Algorithm.DataCompression\Algorithm.DataCompression.csproj", "{8B1A650E-1577-411A-8E46-416930C383F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.Searching", "Algorithm.Searching\Algorithm.Searching.csproj", "{C24D7DDE-B759-4E6C-B36D-AE3F6BD4058C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{8B1A650E-1577-411A-8E46-416930C383F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B1A650E-1577-411A-8E46-416930C383F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B1A650E-1577-411A-8E46-416930C383F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C24D7DDE-B759-4E6C-B36D-AE3F6BD4058C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C24D7DDE-B759-4E6C-B36D-AE3F6BD4058C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C24D7DDE-B759-4E6C-B36D-AE3F6BD4058C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C24D7DDE-B759-4E6C-B36D-AE3F6BD4058C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
