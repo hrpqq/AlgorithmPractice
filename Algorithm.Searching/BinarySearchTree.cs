@@ -1,22 +1,27 @@
-﻿namespace Algorithm.Searching
+﻿using System.Text;
+
+namespace Algorithm.Searching
 {
     public class BinarySearchTree<T> where T : IComparable
     {
-        private Node<T>? _root = null;
+        public int Size => _root.Left?.Size ?? 0;
+        // the true root of the tree is _root.left
+        private Node<T> _root = new Node<T>();
         public void Put(T target)
         {
-            if (_root == null)
+            if (_root.Left == null)
             {
-                _root = new Node<T>() { Object = target };
+                _root.Left = new Node<T> { Value = target };
             }
-            Put(_root, target);
+            else
+                Put(_root.Left, target);
         }
 
         private void Put(Node<T> curNode, T target)
         {
             var nextNode = GetNextNode(curNode, target, true);
             if (nextNode != null
-                && nextNode.Object.CompareTo(target) != 0)
+                && nextNode.Value.CompareTo(target) != 0)
             {
                 Put(nextNode, target);
             }
@@ -25,9 +30,9 @@
         public T? Get(T key)
         {
             T? result = default(T?);
-            if (_root != null)
+            if (_root.Left != null)
             {
-                result = Get(_root, key);
+                result = Get(_root.Left, key);
             }
             return result;
         }
@@ -38,7 +43,7 @@
             var nextNode = GetNextNode(curNode, key);
             if (nextNode == curNode)
             {
-                returnVal = curNode.Object;
+                returnVal = curNode.Value;
             }
             else if (nextNode != null)
             {
@@ -49,67 +54,96 @@
 
         public void Delete(T key)
         {
-            if (_root != null)
-                Delete(ref _root, key);
+            if (_root.Left != null)
+                Delete(_root.Left, _root, key);
         }
 
-        private void Delete(ref Node<T> curNode, T key)
+        private bool Delete(Node<T> curNode, Node<T> curParent, T key)
         {
             var nextNode = GetNextNode(curNode, key);
             if (nextNode != curNode)
             {
                 if (nextNode != null)
-                    Delete(ref nextNode, key);
+                {
+                    var isDel = Delete(nextNode, curNode, key);
+                    if (isDel) curNode.Size--;
+                    return true;
+                }
+                else
+                    return false;    
             }
             else
             {
                 if (curNode.Right != null)
                 {
-                    var min = GetMin(curNode.Right, out _);
+                    var (min, minParent) = GetMin(curNode.Right, curNode);
                     if (min != null)
                     {
-                        DeleteMin(curNode);
+                        DeleteMin(curNode.Right, curNode);
                         min.Left = curNode.Left;
                         min.Right = curNode.Right;
-                        curNode = min;
+                        min.Size = curNode.Size - 1;
+                        if (curParent.Left == curNode) curParent.Left = min;
+                        else curParent.Right = min;
                     }
                 }
                 else
-                    curNode = curNode.Left;
+                {
+                    if (curParent.Left == curNode) curParent.Left = curNode.Left;
+                    else curParent.Right = curNode.Left;
+                }
+                return true; 
             }
         }
 
-        public Node<T> GetMin(Node<T> curNode, out Node<T> parentOfMin)
+        public (Node<T> min, Node<T> minParent) GetMin(Node<T> curNode, Node<T> curParent)
         {
-            Node<T> result = null;
-            parentOfMin = null;
             if (curNode.Left == null)
             {
-                result = curNode;
+                return(curNode, curParent);
             }
             else
             {
-                result = GetMin(curNode.Left, out parentOfMin);
-                if(parentOfMin == null)
-                    parentOfMin = curNode;
+                return GetMin(curNode.Left, curNode);
             }
-            return result;
         }
 
-        public void DeleteMin(Node<T> curNode)
+        public void DeleteMin(Node<T> curNode, Node<T> parent)
         {
-            var minNode = GetMin(curNode, out var parentOfMin);
-            if (minNode != curNode)
+            var (min, minParent) = GetMin(curNode, parent);
+            if (min != curNode)
             {
-                if (minNode.Right == null)
+                if (min.Right == null)
                 {
-                    parentOfMin.Left = null;
+                    minParent.Left = null;
                 }
                 else
                 {
-                    parentOfMin.Left = minNode.Right;
+                    minParent.Left = min.Right;
                 }
             }
+            else 
+            {
+                if (minParent.Left == min) minParent.Left = null;
+                else minParent.Right = null;
+            }
+        }
+
+        public string Print()
+        {
+            var sb = new StringBuilder();
+            if (_root.Left != null)
+            {
+                Print(_root.Left, sb, "|");
+            }
+            return sb.ToString();
+        }
+
+        private void Print(Node<T> curNode, StringBuilder sb, string prefix)
+        {
+            if (curNode.Left != null) Print(curNode.Left, sb, prefix + "--");
+            sb.Append(prefix).AppendLine($"value:{curNode.Value} - size:{curNode.Size}");
+            if (curNode.Right != null) Print(curNode.Right, sb, prefix + "--");
         }
 
         //public int Rank(T key)
@@ -131,19 +165,19 @@
 
         private Node<T>? GetNextNode(Node<T> curNode, T target, bool shouldUpdate = false)
         {
-            var cmpRes = curNode.Object.CompareTo(target);
+            var cmpRes = curNode.Value.CompareTo(target);
             if (cmpRes == 0)
             {
                 if (shouldUpdate)
-                    curNode.Object = target;
+                    curNode.Value = target;
                 return curNode;
             }
-            else if (cmpRes > 0)
+            else if (cmpRes < 0)
             {
                 if (shouldUpdate)
                 {
                     curNode.Size++;
-                    curNode.Right = curNode.Right ?? new Node<T> { Object = target };
+                    curNode.Right = curNode.Right ?? new Node<T> { Value = target };
                 }
                 return curNode.Right;
             }
@@ -152,7 +186,7 @@
                 if (shouldUpdate)
                 {
                     curNode.Size++;
-                    curNode.Left = curNode.Left ?? new Node<T> { Object = target };
+                    curNode.Left = curNode.Left ?? new Node<T> { Value = target };
                 }
                 return curNode.Left;
             }
@@ -162,9 +196,10 @@
     public class Node<T> where T : IComparable
     {
         public int Size { get; set; } = 1;
+        public T Value { get; set; }
         public Node<T>? Left { get; set; }
         public Node<T>? Right { get; set; }
-        public T Object { get; set; }
+        
 
     }
 }
