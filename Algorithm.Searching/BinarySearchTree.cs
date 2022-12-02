@@ -191,15 +191,16 @@ namespace Algorithm.Searching
                 return curNode.Left;
             }
         }
+        public class Node<T> where T : IComparable
+        {
+            public int Size { get; set; } = 1;
+            public T Value { get; set; }
+            public Node<T>? Left { get; set; }
+            public Node<T>? Right { get; set; }
+
+
+        }
     }
 
-    public class Node<T> where T : IComparable
-    {
-        public int Size { get; set; } = 1;
-        public T Value { get; set; }
-        public Node<T>? Left { get; set; }
-        public Node<T>? Right { get; set; }
-        
-
-    }
+    
 }
