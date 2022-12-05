@@ -27,8 +27,8 @@ namespace Algorithm.Test.Searching
             RBTree.Rotate(child, parent);
             Assert.AreEqual(child.Right, parent);
             Assert.AreEqual(grandpa.Left, child);
-            Assert.AreEqual(RBTree.NIL, parent.Left);
-            Assert.AreEqual(RBTree.NIL, parent.Right);
+            Assert.AreEqual(RedblackTree<int, int>.NIL, parent.Left);
+            Assert.AreEqual(RedblackTree<int, int>.NIL, parent.Right);
         }
 
         [TestMethod]
@@ -49,16 +49,67 @@ namespace Algorithm.Test.Searching
             Assert.AreEqual(parent.Right, grandpa);
             Assert.AreEqual(grandpa.P, parent);
             Assert.AreEqual(parent.Left, child);
-            Assert.AreEqual(RBTree.NIL, grandpa.Left);
+            Assert.AreEqual(RedblackTree<int, int>.NIL, grandpa.Left);
         }
 
         [TestMethod]
         public void should_build_correct_red_black_tree()
         {
             var RBTree = new RedblackTree<int, int>();
-            RBTree.Insert(1, 1);
-            RBTree.Insert(2, 2);
+            RBTree.Insert(9, 9);
             RBTree.Insert(3, 3);
+            var tree = RBTree.Print();
+            RBTree.Insert(1, 1);
+            RBTree.Insert(8, 8);
+            RBTree.Insert(2, 2);
+            tree = RBTree.Print();
+            RBTree.Insert(4, 4);
+            RBTree.Insert(10, 10);
+            tree = RBTree.Print();
+            RBTree.Insert(6, 6);
+            RBTree.Insert(7, 7);
+            RBTree.Insert(5, 5);
+            tree = RBTree.Print();
+            Assert.AreEqual(true, true);
+        }
+
+        [TestMethod]
+        public void should_delete_node_in_correct_way()
+        {
+            var RBTree = new RedblackTree<int, int>();
+            RBTree.Insert(9, 9);
+            RBTree.Insert(3, 3);
+            RBTree.Insert(1, 1);
+            RBTree.Insert(8, 8);
+            RBTree.Insert(2, 2);
+            RBTree.Insert(4, 4);
+            RBTree.Insert(10, 10);
+            RBTree.Insert(6, 6);
+            RBTree.Insert(7, 7);
+            RBTree.Insert(5, 5);
+            var tree = RBTree.Print();
+            RBTree.Delete(6);
+            tree = RBTree.Print();
+            Assert.AreEqual(true, true);
+        }
+
+        [TestMethod]
+        public void should_delete_node_in_correct_way2()
+        {
+            var RBTree = new RedblackTree<int, int>();
+            RBTree.Insert(9, 9);
+            RBTree.Insert(3, 3);
+            RBTree.Insert(1, 1);
+            RBTree.Insert(8, 8);
+            RBTree.Insert(2, 2);
+            RBTree.Insert(4, 4);
+            RBTree.Insert(10, 10);
+            RBTree.Insert(6, 6);
+            RBTree.Insert(7, 7);
+            RBTree.Insert(5, 5);
+            var tree = RBTree.Print();
+            RBTree.Delete(3);
+            tree = RBTree.Print();
             Assert.AreEqual(true, true);
         }
     }
