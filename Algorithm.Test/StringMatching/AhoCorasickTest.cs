@@ -38,21 +38,19 @@ namespace Algorithm.Test.StringMatching
 
             Assert.AreEqual(root,
                 root.Children['c'].Fallback);
-
-
-
         }
 
         [TestMethod]
         public void should_find_multiple_targets_in_source_string()
         {
-            var source = ("cnc" + "dnn" + "abcd" + "nn" + "bcd" + "ncnccd" + "bcd" + "c").ToCharArray();
+            // "cnc" + "dnn" + "abcd" + "nn" +
+            var source = ("cnc" + "dnn" + "abcd" + "nn" + "abce" + "nn" + "bcd" + "ncnccd" + "bcd" + "c").ToCharArray();
             var word1 = new char[] { 'a', 'b', 'c', 'd' };
             var word2 = new char[] { 'b', 'c', 'd' };
             var word3 = new char[] { 'c' };
 
             var res = AhoCorasick.MatchTargets(source, new List<char[]> { word1, word2, word3 });
-            Assert.AreEqual(9, res.Count);
+            Assert.AreEqual(10, res.Count);
         }
     }
 }
