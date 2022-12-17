@@ -89,7 +89,6 @@ namespace Algorithm.Searching
                 }
                 Root.IsRed = false;
             }
-            
         }
 
         public void Delete(TKey key)
@@ -125,9 +124,8 @@ namespace Algorithm.Searching
                     Transplant(targetNode, alternate);
                     alternate.Left = targetNode.Left;
                     alternate.Left.P = alternate;
-                    alternate.IsRed = targetNode.IsRed;
+                    alternate.IsRed = targetNode.IsRed;// important
                 }
-                var tree = Print();
                 if (!isTargetNodeRed)
                 {
                     FixUpDeleteBalance(balanceTarget);
