@@ -6,9 +6,9 @@ namespace Algorithm.Sort
     {
         public static bool Less(IComparable lift, IComparable right) => lift.CompareTo(right) < 0;
 
-        public static void Swap(IList<IComparable> source, int a, int b)
+        public static void Swap<T>(IList<T> source, int a, int b)
         {
-            IComparable temp = source[a];
+            var temp = source[a];
             source[a] = source[b];
             source[b] = temp;
         }
