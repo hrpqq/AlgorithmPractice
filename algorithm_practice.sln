@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Algorithm.DataCompression",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Algorithm.Searching", "Algorithm.Searching\Algorithm.Searching.csproj", "{C24D7DDE-B759-4E6C-B36D-AE3F6BD4058C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.Cache", "Algorithm.Cache\Algorithm.Cache.csproj", "{8532F408-1BDC-4F26-9BA5-B4AEE0598643}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Algorithm.Cache", "Algorithm.Cache\Algorithm.Cache.csproj", "{8532F408-1BDC-4F26-9BA5-B4AEE0598643}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.Graph", "Algorithm.Graph\Algorithm.Graph.csproj", "{5E3B3F54-B36C-444E-B5BB-E4189C0115A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{8532F408-1BDC-4F26-9BA5-B4AEE0598643}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8532F408-1BDC-4F26-9BA5-B4AEE0598643}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8532F408-1BDC-4F26-9BA5-B4AEE0598643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E3B3F54-B36C-444E-B5BB-E4189C0115A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E3B3F54-B36C-444E-B5BB-E4189C0115A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E3B3F54-B36C-444E-B5BB-E4189C0115A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E3B3F54-B36C-444E-B5BB-E4189C0115A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

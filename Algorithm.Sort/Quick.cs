@@ -8,7 +8,7 @@ using static Algorithm.Sort.Utilities;
 namespace Algorithm.Sort
 {
     public class Quick
-    {
+    { 
         public static void Sort(IList<IComparable> source)
         {
             InnerSort(source, 0, source.Count - 1);

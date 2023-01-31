@@ -16,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Algorithm.Cache\Algorithm.Cache.csproj" />
+    <ProjectReference Include="..\Algorithm.Graph\Algorithm.Graph.csproj" />
     <ProjectReference Include="..\Algorithm.Searching\Algorithm.Searching.csproj" />
     <ProjectReference Include="..\Algorithm.Sort\Algorithm.Sort.csproj" />
     <ProjectReference Include="..\Algorithm.StringMatching\Algorithm.StringMatching.csproj" />
