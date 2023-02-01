@@ -16,7 +16,7 @@ namespace Algorithm.Test.Graph
 
         public DigraphTest() 
         {
-            gWithLoop = new WeightedDigraph(8);
+            gWithLoop = new WeightedDigraph(11);
             gWithLoop.AddEdge(new DirectedEdge(0, 1, 1));
             gWithLoop.AddEdge(new DirectedEdge(1, 2, 1));
             gWithLoop.AddEdge(new DirectedEdge(2, 3, 1));
@@ -25,6 +25,9 @@ namespace Algorithm.Test.Graph
             gWithLoop.AddEdge(new DirectedEdge(5, 6, 1));
             gWithLoop.AddEdge(new DirectedEdge(6, 7, 1));
             gWithLoop.AddEdge(new DirectedEdge(7, 5, 1));
+            gWithLoop.AddEdge(new DirectedEdge(2, 9, 1));
+            gWithLoop.AddEdge(new DirectedEdge(9, 10, 1));
+            gWithLoop.AddEdge(new DirectedEdge(5, 11, 1));
 
             gWithoutLoop = new WeightedDigraph(8);
             gWithoutLoop.AddEdge(new DirectedEdge(0, 1, 1));
@@ -34,6 +37,10 @@ namespace Algorithm.Test.Graph
             gWithoutLoop.AddEdge(new DirectedEdge(4, 5, 1));
             gWithoutLoop.AddEdge(new DirectedEdge(5, 6, 1));
             gWithoutLoop.AddEdge(new DirectedEdge(6, 7, 1));
+            // gWithoutLoop.AddEdge(new DirectedEdge(7, 5, 1)); remove the loop
+            gWithoutLoop.AddEdge(new DirectedEdge(2, 9, 1));
+            gWithoutLoop.AddEdge(new DirectedEdge(9, 10, 1));
+            gWithoutLoop.AddEdge(new DirectedEdge(5, 11, 1));
         }
 
         [TestMethod]

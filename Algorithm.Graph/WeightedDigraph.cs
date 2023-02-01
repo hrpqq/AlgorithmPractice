@@ -37,56 +37,50 @@ namespace Algorithm.Graph
 
         public WeightedDigraph Reverse()
         {
-            var returnVal = new WeightedDigraph(EdgeCount);
-            foreach(var edge in VEListArr.SelectMany(l => l))
+            var returnVal = new WeightedDigraph(VectorCount);
+            foreach(var edge in VEListArr.SelectMany(l => l ?? Enumerable.Empty<DirectedEdge>()))
             {
-                returnVal.AddEdge(edge);
+                returnVal.AddEdge(new DirectedEdge(edge.To, edge.From, edge.Weight));
             }
             return returnVal;
         }
 
         public bool HasLoop()
         {
-            var callStackVariables = new Stack<(IEnumerator<DirectedEdge> vectorAdjEdge, int vectorIdx)>();
-            var VectorsInPath= new HashSet<int>();
+            var callStackVariables = new Stack<(IEnumerator<DirectedEdge> vectorAdjEdges, int vectorIdx)>();
+            var vectorsInPath= new HashSet<int>();
             var hasVisited = new bool[_vectorCount];
             for (int i = 0; i < _vectorCount; i++)
             {
                 if (hasVisited[i]) continue;
-                IEnumerator<DirectedEdge> getEnumerator(int idx) => VEListArr[idx]
-                                                            ?.GetEnumerator()
-                                                            ?? Enumerable.Empty<DirectedEdge>().GetEnumerator();
-                int vectorTo = i;
+                int vIdx = i;
                 bool goDeeper = true;
-                IEnumerator<DirectedEdge> curEnumerator = getEnumerator(vectorTo);
+                IEnumerator<DirectedEdge> curEnumerator = getEnumerator(vIdx);
                 while (true)
                 {
                     if (goDeeper)
                     {
-                        hasVisited[vectorTo] = true;
-                        if (VectorsInPath.Contains(vectorTo))
-                            return true;
-                        else
-                            VectorsInPath.Add(vectorTo);
-                        curEnumerator = getEnumerator(vectorTo);
-                        callStackVariables.Push((curEnumerator, vectorTo));
+                        hasVisited[vIdx] = true;
+                        curEnumerator = getEnumerator(vIdx);
+                        callStackVariables.Push((curEnumerator, vIdx));
                     }
-
                     if (curEnumerator.MoveNext())
                     {
                         var edge = curEnumerator.Current;
-                        //hasVisited[edge.From] = true;
-                        if (!hasVisited[edge.To])
+                        if (!vectorsInPath.Contains(edge.To))
                         {
-                            vectorTo = edge.To;
+                            vIdx = edge.To;
+                            vectorsInPath.Add(vIdx);
                             goDeeper = true;
                         }
+                        else
+                            return true;
                     }
                     else if (callStackVariables.Count > 0)
                     {
                         goDeeper = false;
-                        (curEnumerator, vectorTo) = callStackVariables.Pop();
-                        VectorsInPath.Remove(vectorTo);
+                        (curEnumerator, vIdx) = callStackVariables.Pop();
+                        vectorsInPath.Remove(vIdx);
                     }
                     else
                         break; 
@@ -95,7 +89,10 @@ namespace Algorithm.Graph
             return false;
         }
 
-        
+        private IEnumerator<DirectedEdge> getEnumerator(int vIdx) 
+            => VEListArr[vIdx]
+                ?.GetEnumerator()
+                ?? Enumerable.Empty<DirectedEdge>().GetEnumerator();
 
     }
 }
