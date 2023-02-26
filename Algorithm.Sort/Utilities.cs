@@ -38,6 +38,18 @@ namespace Algorithm.Sort
             return true;
         }
 
+        public static bool ElementEqual<T>(IEnumerable<T> lift, IEnumerable<T> right) where T : IComparable<T>
+        {
+            if (lift.Count() != right.Count())
+                return false;
+            for (int i = 0; i < lift.Count(); i++)
+            {
+                if (lift.ElementAt(i).CompareTo(right.ElementAt(i)) != 0)
+                    return false;
+            }
+            return true;
+        }
+
         public static void Show(IList<IComparable> list) 
         {
             StringBuilder sb = new StringBuilder();

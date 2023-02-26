@@ -14,14 +14,14 @@ namespace Algorithm.Sort
         {
             _copy = new List<IComparable>(source);
             int N = source.Count;
-            int subSize = 1;
-            while (subSize < N)
+            int stepSize = 1;
+            while (stepSize < N)
             {
-                for (int i = 0; i < N - subSize; i += 2 * subSize)
+                for (int i = 0; i < N - stepSize; i += 2 * stepSize)
                 {
-                    InnerMerge(source, i, i + subSize - 1, Math.Min(i + 2 * subSize - 1, N - 1));
+                    InnerMerge(source, i, i + stepSize - 1, Math.Min(i + 2 * stepSize - 1, N - 1));
                 }
-                subSize *= 2;
+                stepSize *= 2;
             }
         }
 

@@ -19,7 +19,7 @@ namespace Algorithm.Sort
             }
             while (heap.Count > 0)
             {
-                res.Add(heap.PopMin());
+                res.Add(heap.PopMax());
             }
             res = res.Reverse().ToArray();
             return res;
@@ -36,21 +36,21 @@ namespace Algorithm.Sort
                 _array = new T[16];
             }
 
-            public T? GetMin()
+            public T? GetMax()
             {
                 return Count > 0
                         ? _array[1]
                         : default(T);
             }
 
-            public T? PopMin()
+            public T? PopMax()
             {
-                var res = GetMin();
-                DeleteMin();
+                var res = GetMax();
+                DeleteMax();
                 return res;
             }
 
-            public void DeleteMin()
+            public void DeleteMax()
             {
                 if (Count == 1)
                     _endIndex = 0;
